@@ -21,21 +21,23 @@ pings = [
     {"service_name": "auth_service", "timestamp": "2023-11-27T10:55:00", "response_time": 205}
 ]
 
-temp_dict = {}
-count_dict = {}
-for i in pings:
-    key = i["service_name"]
-    value = i["response_time"]
-    if key not in temp_dict:
-        temp_dict[key] = value
-        count_dict[key] = 1
-    elif key in temp_dict:
-        c1 = temp_dict.get(key) 
-        total = c1 + value
-        temp_dict[key] = total 
-        count_dict[key] += 1
-for items in temp_dict:
-     average = temp_dict[items]/ count_dict[items]
-     temp_dict[items] = average
+def calculate_average_response_time(info):
+    temp_dict = {}
+    count_dict = {}
+    for i in pings:
+        key = i["service_name"]
+        value = i["response_time"]
+        if key not in temp_dict:
+            temp_dict[key] = value
+            count_dict[key] = 1
+        elif key in temp_dict:
+            c1 = temp_dict.get(key) 
+            total = c1 + value
+            temp_dict[key] = total 
+            count_dict[key] += 1
+    for items in temp_dict:
+        average = temp_dict[items]/ count_dict[items]
+        temp_dict[items] = average
+    print(temp_dict)
 
-print(temp_dict)
+calculate_average_response_time(pings)
